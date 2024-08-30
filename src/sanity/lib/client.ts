@@ -1,3 +1,5 @@
+import 'server-only';
+
 import { createClient, QueryOptions, type QueryParams } from 'next-sanity';
 import { draftMode } from 'next/headers';
 
@@ -15,13 +17,13 @@ export const client = createClient({
   },
 });
 
-export async function sanityFetch<const QueryString extends string>({
+export async function sanityFetch<QueryResponse>({
   query,
   params = {},
   revalidate = 60, // default revalidation time in seconds
   tags = [],
 }: {
-  query: QueryString;
+  query: string;
   params?: QueryParams;
   revalidate?: number | false;
   tags?: string[];
@@ -44,7 +46,7 @@ export async function sanityFetch<const QueryString extends string>({
   } else if (tags.length) {
     maybeRevalidate = false; // Cache indefinitely if tags supplied
   }
-  return client.fetch(query, params, {
+  return client.fetch<QueryResponse>(query, params, {
     ...queryOptions,
     next: {
       revalidate: tags.length ? false : revalidate, // for simple, time-based revalidation

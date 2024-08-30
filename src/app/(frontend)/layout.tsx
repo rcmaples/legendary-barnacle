@@ -1,6 +1,5 @@
 import '../globals.css';
 import { Header } from '../../components/Header';
-// import { VisualEditing } from 'next-sanity';
 import { LiveVisualEditing } from '../../components/LiveVisualEditing';
 import { draftMode } from 'next/headers';
 
