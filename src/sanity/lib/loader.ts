@@ -22,6 +22,7 @@ export const loadQuery = ((query, params = {}, options = {}) => {
   // If `next.tags` is set, and we're not using the CDN, then it's safe to cache
   if (
     !usingCdn &&
+    options.next &&
     Array.isArray(options.next?.tags) &&
     options.next.tags.length
   ) {
