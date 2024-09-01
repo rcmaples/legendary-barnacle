@@ -2,8 +2,8 @@
 
 import { QueryResponseInitial, useQuery } from '@sanity/react-loader';
 
-import { POSTS_QUERY } from '../sanity/lib/queries';
-import { POSTS_QUERYResult } from '../sanity/types';
+import { POSTS_QUERY } from '@/sanity/lib/queries';
+import { POSTS_QUERYResult } from '@/sanity/types';
 import { PostCard } from './PostCard';
 
 export function PostCardPreview({

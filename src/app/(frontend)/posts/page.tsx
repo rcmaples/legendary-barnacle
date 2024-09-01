@@ -1,10 +1,10 @@
 import { draftMode } from 'next/headers';
-import { loadQuery } from '../../../sanity/lib/loader';
-import { PostCard } from '../../../components/PostCard';
-import { PostCardPreview } from '../../../components/PostCardPreview';
-import { POSTS_QUERY } from '../../../sanity/lib/queries';
-import { POSTS_QUERYResult } from '../../../sanity/types';
-import { Title } from '../../../components/Title';
+import { loadQuery } from '@/sanity/lib/loader';
+import { PostCard } from '@/components/PostCard';
+import { PostCardPreview } from '@/components/PostCardPreview';
+import { POSTS_QUERY } from '@/sanity/lib/queries';
+import { POSTS_QUERYResult } from '@/sanity/types';
+import { Title } from '@/components/Title';
 
 export default async function Page() {
   const initial = await loadQuery<POSTS_QUERYResult>(

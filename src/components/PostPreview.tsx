@@ -2,8 +2,8 @@
 
 import { QueryResponseInitial, useQuery } from '@sanity/react-loader';
 
-import { POST_QUERY } from '../sanity/lib/queries';
-import { POST_QUERYResult } from '../sanity/types';
+import { POST_QUERY } from '@/sanity/lib/queries';
+import { POST_QUERYResult } from '@/sanity/types';
 import { Post } from './Post';
 
 import { useParams } from 'next/navigation';

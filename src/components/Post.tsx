@@ -2,12 +2,12 @@ import Image from 'next/image';
 
 import { Author } from './Author';
 import { Categories } from './Categories';
-import { components } from '../sanity/portableTextComponents';
+import { components } from '@/sanity/portableTextComponents';
 import { PortableText } from 'next-sanity';
-import { POST_QUERYResult } from '../sanity/types';
+import { POST_QUERYResult } from '@/sanity/types';
 import { PublishedAt } from './PublishedAt';
 import { Title } from './Title';
-import { urlFor } from '../sanity/lib/image';
+import { urlFor } from '@/sanity/lib/image';
 
 export function Post(props: NonNullable<POST_QUERYResult>) {
   const { title, author, mainImage, body, publishedAt, categories } = props;

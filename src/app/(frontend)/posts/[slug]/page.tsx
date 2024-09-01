@@ -1,10 +1,10 @@
 import { draftMode } from 'next/headers';
-import { loadQuery } from '../../../../sanity/lib/loader';
+import { loadQuery } from '@/sanity/lib/loader';
 import { notFound } from 'next/navigation';
-import { Post } from '../../../../components/Post';
-import { POST_QUERY } from '../../../../sanity/lib/queries';
-import { POST_QUERYResult } from '../../../../sanity/types';
-import { PostPreview } from '../../../../components/PostPreview';
+import { Post } from '@/components/Post';
+import { POST_QUERY } from '@/sanity/lib/queries';
+import { POST_QUERYResult } from '@/sanity/types';
+import { PostPreview } from '@/components/PostPreview';
 
 type PostIndexProps = { params: { slug: string } };
 

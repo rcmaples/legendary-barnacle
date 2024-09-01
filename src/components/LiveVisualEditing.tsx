@@ -4,7 +4,7 @@ import { useLiveMode } from '@sanity/react-loader';
 import { createClient, VisualEditing } from 'next-sanity';
 import { useEffect } from 'react';
 
-import { apiVersion, dataset, projectId } from '../sanity/env';
+import { apiVersion, dataset, projectId } from '@/sanity/env';
 
 // Always enable stega in Live Mode
 const stegaClient = createClient({

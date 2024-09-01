@@ -5,7 +5,7 @@ import { Author } from './Author';
 import { Categories } from './Categories';
 import { POSTS_QUERYResult } from '../sanity/types';
 import { PublishedAt } from './PublishedAt';
-import { urlFor } from '../sanity/lib/image';
+import { urlFor } from '@/sanity/lib/image';
 
 export function PostCard(props: POSTS_QUERYResult[0]) {
   const { title, author, mainImage, publishedAt, categories } = props;
