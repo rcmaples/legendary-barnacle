@@ -47,3 +47,12 @@ export const POST_QUERY =
     image
   }
 }`);
+
+export const EMOJIS_QUERY =
+  defineQuery(`*[_type == "emoji" && defined(slug.current)]|order(publishedAt desc)[0...49]{
+  _id,
+  title,
+  slug,
+  imageFile,
+  publishedAt
+}`);
