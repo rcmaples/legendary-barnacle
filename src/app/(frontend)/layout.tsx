@@ -1,7 +1,9 @@
+import { draftMode } from 'next/headers';
+
 import '../globals.css';
+import { EmojiHeader } from '@/components/EmojiHeader';
 import { Header } from '@/components/Header';
 import { LiveVisualEditing } from '@/components/LiveVisualEditing';
-import { draftMode } from 'next/headers';
 
 export default function RootLayout({
   children,
@@ -18,8 +20,6 @@ export default function RootLayout({
             Disable preview mode
           </a>
         )}
-
-        <Header />
         {children}
         {draftMode().isEnabled && <LiveVisualEditing />}
       </body>

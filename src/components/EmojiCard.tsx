@@ -14,7 +14,7 @@ export function EmojiCard(props: EMOJIS_QUERYResult[0]) {
 
   return (
     <Link href={downloadURL}>
-      <article className="inline-block w-[200px] p-[7px_10px] m-[10px_5px_10px_0] border border-[#afafaf] text-left rounded-[3px]">
+      <article className="flex flex-col items-center p-4 bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden">
         <div className="flex items-center">
           {imageFile ? (
             <Image
@@ -23,12 +23,12 @@ export function EmojiCard(props: EMOJIS_QUERYResult[0]) {
               height={32}
               width={32}
               alt={`:${slug?.current}:`}
-              className="flex-shrink-0"
+              // className="flex-shrink-0"
+              className="text-4xl mb-2"
             />
           ) : null}
-          <span className="inline-block align-middle pl-[13px] truncate w-[160px]">
-            {`:${title}:`}
-          </span>
+          {/* <span className="inline-block align-middle pl-[13px] truncate w-[160px]"> */}
+          <span className="text-center truncate pl-2">{`:${title}:`}</span>
         </div>
       </article>
     </Link>
