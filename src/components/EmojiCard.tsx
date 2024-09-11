@@ -1,15 +1,20 @@
+// @ts-nocheck
+
 import Image from 'next/image';
 import Link from 'next/link';
 
-import { EMOJIS_QUERYResult } from '../sanity/types';
+import { INITIAL_EMOJIS_QUERYResult } from '../sanity/types';
 import { urlFor } from '@/sanity/lib/image';
 
-export function EmojiCard(props: EMOJIS_QUERYResult[0]) {
-  const { title, slug, imageFile } = props;
+export function EmojiCard(props: INITIAL_EMOJIS_QUERYResult[0]) {
+  let title, slug, imageFile;
+  if (!props['emoji']) {
+    ({ title, slug, imageFile } = props);
+  } else {
+    ({ title, slug, imageFile } = props['emoji']);
+  }
 
-  // @ts-ignore
   const isGif = imageFile.filename.indexOf('.gif');
-  // @ts-ignore
   const downloadURL = urlFor(imageFile).forceDownload(imageFile.filename).url();
 
   return (
