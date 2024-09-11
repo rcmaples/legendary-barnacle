@@ -2,9 +2,9 @@ import { validatePreviewUrl } from '@sanity/preview-url-secret';
 import { draftMode } from 'next/headers';
 import { NextRequest, NextResponse } from 'next/server';
 
-import { client } from '../../../../sanity/lib/client';
-import { token } from '../../../../sanity/lib/token';
+import { client } from '@/sanity/lib/client';
 
+const token = process.env.SANITY_API_READ_TOKEN;
 const clientWithToken = client.withConfig({ token });
 
 export async function GET(request: NextRequest) {
