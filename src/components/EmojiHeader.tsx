@@ -5,6 +5,7 @@ export function EmojiHeader() {
         <span className="text-pink-600 md:text-xl font-bold tracking-tight">
           FullStory Slackmojis 🚀
         </span>
+        Click an emoji to download it!
       </header>
     </div>
   );
