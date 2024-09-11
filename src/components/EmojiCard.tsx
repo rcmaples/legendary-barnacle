@@ -1,10 +1,10 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
-import { EMOJIS_QUERYResult } from '../sanity/types';
+import { INITIAL_EMOJIS_QUERYResult } from '../sanity/types';
 import { urlFor } from '@/sanity/lib/image';
 
-export function EmojiCard(props: EMOJIS_QUERYResult[0]) {
+export function EmojiCard(props: INITIAL_EMOJIS_QUERYResult[0]) {
   const { title, slug, imageFile } = props;
 
   // @ts-ignore

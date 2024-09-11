@@ -1,21 +1,23 @@
-import 'server-only';
+// import 'server-only';
 
 import * as queryStore from '@sanity/react-loader';
-import { draftMode } from 'next/headers';
+// import { draftMode } from 'next/headers';
 
 import { client } from './client';
-import { token } from './token';
+// import { token } from './token';
 
-queryStore.setServerClient(client.withConfig({ token }));
+const token = process.env.SANITY_API_READ_TOKEN;
+
+// queryStore.setServerClient(client.withConfig({ token }));
 
 // Automatically handle draft mode
 export const loadQuery = ((query, params = {}, options = {}) => {
   const usingCdn = client.config().useCdn;
-  const isDraftMode = draftMode().isEnabled;
+  // const isDraftMode = draftMode().isEnabled;
 
-  if (isDraftMode && !token) {
-    throw new Error('Missing environment variable SANITY_API_READ_TOKEN');
-  }
+  // if (isDraftMode && !token) {
+  //   throw new Error('Missing environment variable SANITY_API_READ_TOKEN');
+  // }
 
   // Don't cache by default
   let revalidate: number | false = 0;
@@ -36,8 +38,8 @@ export const loadQuery = ((query, params = {}, options = {}) => {
       revalidate,
       ...(options.next || {}),
     },
-    perspective: isDraftMode ? 'previewDrafts' : 'published',
+    // perspective: isDraftMode ? 'previewDrafts' : 'published',
     // Enable stega if in Draft Mode, to enable overlays when outside Sanity Studio
-    stega: isDraftMode,
+    // stega: isDraftMode,
   });
 }) satisfies typeof queryStore.loadQuery;

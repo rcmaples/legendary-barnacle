@@ -1,10 +1,11 @@
-import 'server-only';
+// import 'server-only';
 
 import { createClient, QueryOptions, type QueryParams } from 'next-sanity';
-import { draftMode } from 'next/headers';
+// import { draftMode } from 'next/headers';
 
 import { apiVersion, dataset, projectId } from '../env';
-import { token } from './token';
+
+const token = process.env.SANITY_API_READ_TOKEN;
 
 export const client = createClient({
   projectId,
@@ -28,24 +29,24 @@ export async function sanityFetch<QueryResponse>({
   revalidate?: number | false;
   tags?: string[];
 }) {
-  const isDraftMode = draftMode().isEnabled;
+  // // const isDraftMode = draftMode().isEnabled;
 
-  if (isDraftMode && !token) {
-    throw new Error('Missing environment variable SANITY_API_READ_TOKEN');
-  }
+  // if (isDraftMode && !token) {
+  //   throw new Error('Missing environment variable SANITY_API_READ_TOKEN');
+  // }
 
   let queryOptions: QueryOptions = {};
-  let maybeRevalidate = revalidate;
+  // let maybeRevalidate = revalidate;
 
-  if (isDraftMode) {
-    queryOptions.token = token;
-    queryOptions.perspective = 'previewDrafts';
-    queryOptions.stega = true;
+  // if (isDraftMode) {
+  //   queryOptions.token = token;
+  //   queryOptions.perspective = 'previewDrafts';
+  //   queryOptions.stega = true;
 
-    maybeRevalidate = 0; // Do not cache in Draft Mode
-  } else if (tags.length) {
-    maybeRevalidate = false; // Cache indefinitely if tags supplied
-  }
+  //   maybeRevalidate = 0; // Do not cache in Draft Mode
+  // } else if (tags.length) {
+  // maybeRevalidate = false; // Cache indefinitely if tags supplied
+
   return client.fetch<QueryResponse>(query, params, {
     ...queryOptions,
     next: {

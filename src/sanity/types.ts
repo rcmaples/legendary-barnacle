@@ -86,6 +86,7 @@ export type Emoji = {
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
     alt?: string;
+    filename?: string;
     _type: "image";
   };
 };
@@ -461,9 +462,9 @@ export type POST_QUERYResult = {
     } | null;
   } | null;
 } | null;
-// Variable: EMOJIS_QUERY
-// Query: *[_type == "emoji" && defined(slug.current)]|order(publishedAt desc)[0...49]{  _id,  title,  slug,  imageFile,  publishedAt}
-export type EMOJIS_QUERYResult = Array<{
+// Variable: INITIAL_EMOJIS_QUERY
+// Query: *[_type == "emoji" && defined(slug.current)]|order(slug)[0...100]{  _id,  title,  slug,  imageFile,  publishedAt}
+export type INITIAL_EMOJIS_QUERYResult = Array<{
   _id: string;
   title: string | null;
   slug: Slug | null;
@@ -477,6 +478,28 @@ export type EMOJIS_QUERYResult = Array<{
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
     alt?: string;
+    filename?: string;
+    _type: "image";
+  } | null;
+  publishedAt: null;
+}>;
+// Variable: LOAD_MORE_EMOJIS_QUERY
+// Query: *[_type == "emoji" && defined(slug.current) && slug > $lastSlug] | order(slug)[0...100]{    _id,    title,    slug,    imageFile,    publishedAt}
+export type LOAD_MORE_EMOJIS_QUERYResult = Array<{
+  _id: string;
+  title: string | null;
+  slug: Slug | null;
+  imageFile: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt?: string;
+    filename?: string;
     _type: "image";
   } | null;
   publishedAt: null;
@@ -489,6 +512,7 @@ declare module "@sanity/client" {
     "*[_type == \"post\" && defined(slug.current)]|order(publishedAt desc)[0...12]{\n  _id,\n  title,\n  slug,\n  body,\n  mainImage,\n  publishedAt,\n  \"categories\": coalesce(\n    categories[]->{\n      _id,\n      slug,\n      title\n    },\n    []\n  ),\n  author->{\n    name,\n    image\n  }\n}": POSTS_QUERYResult;
     "*[_type == \"post\" && defined(slug.current)]{ \n  \"slug\": slug.current\n}": POSTS_SLUGS_QUERYResult;
     "*[_type == \"post\" && slug.current == $slug][0]{\n  _id,\n  title,\n  body,\n  mainImage,\n  publishedAt,\n  \"categories\": coalesce(\n    categories[]->{\n      _id,\n      slug,\n      title\n    },\n    []\n  ),\n  author->{\n    name,\n    image\n  }\n}": POST_QUERYResult;
-    "*[_type == \"emoji\" && defined(slug.current)]|order(publishedAt desc)[0...49]{\n  _id,\n  title,\n  slug,\n  imageFile,\n  publishedAt\n}": EMOJIS_QUERYResult;
+    "*[_type == \"emoji\" && defined(slug.current)]|order(slug)[0...100]{\n  _id,\n  title,\n  slug,\n  imageFile,\n  publishedAt\n}": INITIAL_EMOJIS_QUERYResult;
+    "*[_type == \"emoji\" && defined(slug.current) && slug > $lastSlug] | order(slug)[0...100]{\n    _id,\n    title,\n    slug,\n    imageFile,\n    publishedAt\n}": LOAD_MORE_EMOJIS_QUERYResult;
   }
 }

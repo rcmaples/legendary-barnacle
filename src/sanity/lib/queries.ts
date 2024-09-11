@@ -48,11 +48,20 @@ export const POST_QUERY =
   }
 }`);
 
-export const EMOJIS_QUERY =
-  defineQuery(`*[_type == "emoji" && defined(slug.current)]|order(publishedAt desc)[0...250]{
+export const INITIAL_EMOJIS_QUERY =
+  defineQuery(`*[_type == "emoji" && defined(slug.current)]|order(slug)[0...100]{
   _id,
   title,
   slug,
   imageFile,
   publishedAt
+}`);
+
+export const LOAD_MORE_EMOJIS_QUERY =
+  defineQuery(`*[_type == "emoji" && defined(slug.current) && slug > $lastSlug] | order(slug)[0...100]{
+    _id,
+    title,
+    slug,
+    imageFile,
+    publishedAt
 }`);
