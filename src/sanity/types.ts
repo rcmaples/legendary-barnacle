@@ -463,7 +463,7 @@ export type POST_QUERYResult = {
   } | null;
 } | null;
 // Variable: INITIAL_EMOJIS_QUERY
-// Query: *[_type == "emoji" && defined(slug.current)]|order(slug.current asc)[0...150]{  _id,  title,  slug,  imageFile,  publishedAt}
+// Query: *[_type == "emoji" && defined(slug.current)]|order(slug.current asc)[0...100]{  _id,  title,  slug,  imageFile,  publishedAt}
 export type INITIAL_EMOJIS_QUERYResult = Array<{
   _id: string;
   title: string | null;
@@ -484,8 +484,29 @@ export type INITIAL_EMOJIS_QUERYResult = Array<{
   publishedAt: null;
 }>;
 // Variable: LOAD_MORE_EMOJIS_QUERY
-// Query: *[_type == "emoji" && defined(slug.current) && slug.current > $lastSlug] | order(slug.current asc)[0...150]{    _id,    title,    slug,    imageFile,    publishedAt}
+// Query: *[_type == "emoji" && defined(slug.current) && slug.current > $lastSlug] | order(slug.current asc)[0...100]{    _id,    title,    slug,    imageFile,    publishedAt}
 export type LOAD_MORE_EMOJIS_QUERYResult = Array<{
+  _id: string;
+  title: string | null;
+  slug: Slug | null;
+  imageFile: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt?: string;
+    filename?: string;
+    _type: "image";
+  } | null;
+  publishedAt: null;
+}>;
+// Variable: SEARCH_FOR_EMOJIS_QUERY
+// Query: *[_type == "emoji" && title match "*" + $search + "*"] | order(slug.current asc){    _id,    title,    slug,    imageFile,    publishedAt}
+export type SEARCH_FOR_EMOJIS_QUERYResult = Array<{
   _id: string;
   title: string | null;
   slug: Slug | null;
@@ -512,7 +533,8 @@ declare module "@sanity/client" {
     "*[_type == \"post\" && defined(slug.current)]|order(publishedAt desc)[0...12]{\n  _id,\n  title,\n  slug,\n  body,\n  mainImage,\n  publishedAt,\n  \"categories\": coalesce(\n    categories[]->{\n      _id,\n      slug,\n      title\n    },\n    []\n  ),\n  author->{\n    name,\n    image\n  }\n}": POSTS_QUERYResult;
     "*[_type == \"post\" && defined(slug.current)]{ \n  \"slug\": slug.current\n}": POSTS_SLUGS_QUERYResult;
     "*[_type == \"post\" && slug.current == $slug][0]{\n  _id,\n  title,\n  body,\n  mainImage,\n  publishedAt,\n  \"categories\": coalesce(\n    categories[]->{\n      _id,\n      slug,\n      title\n    },\n    []\n  ),\n  author->{\n    name,\n    image\n  }\n}": POST_QUERYResult;
-    "*[_type == \"emoji\" && defined(slug.current)]|order(slug.current asc)[0...150]{\n  _id,\n  title,\n  slug,\n  imageFile,\n  publishedAt\n}": INITIAL_EMOJIS_QUERYResult;
-    "*[_type == \"emoji\" && defined(slug.current) && slug.current > $lastSlug] | order(slug.current asc)[0...150]{\n    _id,\n    title,\n    slug,\n    imageFile,\n    publishedAt\n}": LOAD_MORE_EMOJIS_QUERYResult;
+    "*[_type == \"emoji\" && defined(slug.current)]|order(slug.current asc)[0...100]{\n  _id,\n  title,\n  slug,\n  imageFile,\n  publishedAt\n}": INITIAL_EMOJIS_QUERYResult;
+    "*[_type == \"emoji\" && defined(slug.current) && slug.current > $lastSlug] | order(slug.current asc)[0...100]{\n    _id,\n    title,\n    slug,\n    imageFile,\n    publishedAt\n}": LOAD_MORE_EMOJIS_QUERYResult;
+    "*[_type == \"emoji\" && title match \"*\" + $search + \"*\"] | order(slug.current asc){\n    _id,\n    title,\n    slug,\n    imageFile,\n    publishedAt\n}": SEARCH_FOR_EMOJIS_QUERYResult;
   }
 }

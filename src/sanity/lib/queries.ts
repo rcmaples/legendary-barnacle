@@ -49,7 +49,7 @@ export const POST_QUERY =
 }`);
 
 export const INITIAL_EMOJIS_QUERY =
-  defineQuery(`*[_type == "emoji" && defined(slug.current)]|order(slug.current asc)[0...150]{
+  defineQuery(`*[_type == "emoji" && defined(slug.current)]|order(slug.current asc)[0...100]{
   _id,
   title,
   slug,
@@ -58,7 +58,16 @@ export const INITIAL_EMOJIS_QUERY =
 }`);
 
 export const LOAD_MORE_EMOJIS_QUERY =
-  defineQuery(`*[_type == "emoji" && defined(slug.current) && slug.current > $lastSlug] | order(slug.current asc)[0...150]{
+  defineQuery(`*[_type == "emoji" && defined(slug.current) && slug.current > $lastSlug] | order(slug.current asc)[0...100]{
+    _id,
+    title,
+    slug,
+    imageFile,
+    publishedAt
+}`);
+
+export const SEARCH_FOR_EMOJIS_QUERY =
+  defineQuery(`*[_type == "emoji" && title match "*" + $search + "*"] | order(slug.current asc){
     _id,
     title,
     slug,
