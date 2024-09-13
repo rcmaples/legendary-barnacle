@@ -1,7 +1,6 @@
 import { draftMode } from 'next/headers';
 
 import '../globals.css';
-import { EmojiHeader } from '@/components/EmojiHeader';
 import { Header } from '@/components/Header';
 import { LiveVisualEditing } from '@/components/LiveVisualEditing';
 
