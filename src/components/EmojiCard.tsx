@@ -7,7 +7,8 @@ import Link from 'next/link';
 import { INITIAL_EMOJIS_QUERYResult } from '../sanity/types';
 import { urlFor } from '@/sanity/lib/image';
 
-import * as FullStory from '@fullstory/browser';
+// import * as FullStory from '@fullstory/browser';
+import { FullStory as FS } from '@fullstory/browser';
 import { useEffect } from 'react';
 
 export function EmojiCard(props: INITIAL_EMOJIS_QUERYResult[0]) {
@@ -22,17 +23,15 @@ export function EmojiCard(props: INITIAL_EMOJIS_QUERYResult[0]) {
   const downloadURL = urlFor(imageFile).forceDownload(imageFile.filename).url();
 
   const handleDownloadClick = (e) => {
-    // console.log(FullStory('getSession', { format: 'url' }));
-    console.log(FullStory('getSession', { format: 'url.now' }));
     const emojiEl = e.target.textContent;
     const emoji = emojiEl.replace(/:/g, '');
 
-    //   FS('trackEvent', {
-    //     name: 'emoji downloaded',
-    //     properties: {
-    //       name: emoji,
-    //     },
-    //   });
+    FS('trackEvent', {
+      name: 'emoji downloaded',
+      properties: {
+        name: emoji,
+      },
+    });
   };
 
   return (
