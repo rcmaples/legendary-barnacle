@@ -12,6 +12,7 @@
     "typegen": "sanity schema extract --path=./src/sanity/extract.json && sanity typegen generate"
   },
   "dependencies": {
+    "@fullstory/browser": "^2.0.5",
     "@sanity-typed/types": "^6.3.6",
     "@sanity/icons": "^3.4.0",
     "@sanity/image-url": "^1.0.2",

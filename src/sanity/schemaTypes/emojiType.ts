@@ -1,6 +1,8 @@
 import { SparklesIcon } from '@sanity/icons';
 import { defineType } from 'sanity';
 
+
+
 export const emojiType = defineType({
   name: 'emoji',
   title: 'Emoji',
@@ -37,6 +39,13 @@ export const emojiType = defineType({
           name: 'filename',
           type: 'string',
           title: 'filename',
+        },
+        {
+          name: 'downloads',
+          type: 'number',
+          title: '# of Downloads',
+          readOnly: true,
+          initialValue: 0,
         },
       ],
     },

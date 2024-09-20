@@ -74,3 +74,5 @@ export const SEARCH_FOR_EMOJIS_QUERY =
     imageFile,
     publishedAt
 }`);
+
+// export const INCREMENT_EMOJI_DOWNLOAD_QUERY = defineQuery(``);

@@ -117,7 +117,7 @@ export default function Page() {
             value={searchTerm}
             onChange={handleSearchChange}
             placeholder="Search emojis..."
-            className="border-b-pink-300 px-2 border-b-2"
+            className="border-b-pink-300 px-2 border-b-2 fs-unmask"
           />
           <span className="text-pink-600 md:text-xl font-bold tracking-tight">
             Click an emoji to download it!
