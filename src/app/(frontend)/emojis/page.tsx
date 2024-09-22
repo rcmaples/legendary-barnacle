@@ -3,8 +3,10 @@
 
 import { useEffect, useState, useRef } from 'react';
 import { useInView } from 'react-intersection-observer';
+import { Image } from 'next-sanity/image';
+import imageUrlBuilder from '@sanity/image-url';
 
-import { sanityFetch } from '@/sanity/lib/client';
+import { client, sanityFetch } from '@/sanity/lib/client';
 
 import { EmojiCard } from '@/components/EmojiCard';
 import { EmojiHeader } from '@/components/EmojiHeader';
@@ -14,7 +16,15 @@ import {
   SEARCH_FOR_EMOJIS_QUERY,
 } from '@/sanity/lib/queries';
 import { EMOJIS_QUERYResult } from '@/sanity/types';
-import { set } from 'sanity';
+// import { set } from 'sanity';
+
+const builder = imageUrlBuilder(client);
+
+const chompy = 'image-ba886970910edcee930e4303aeef2371aa827dbe-50x50-gif';
+
+const urlFor = (source) => {
+  return builder.image(source);
+};
 
 export default function Page() {
   const { ref, inView } = useInView();
@@ -109,17 +119,24 @@ export default function Page() {
   return (
     <>
       <div className="p-6 sticky top-0 bg-white">
-        <header className="bg-white flex items-center justify-between p-6 rounded-lg container mx-auto shadow-pink-50">
-          <span className="text-pink-600 md:text-xl font-bold tracking-tight">
-            FullStory Slackmojis 🚀
+        <header className="bg-white flex-col sm:flex-row flex items-center justify-around sm:p-6 rounded-lg container mx-auto shadow-pink-50 flex-wrap">
+          <span className="text-pink-600 mb-2 text-md md:text-xl font-bold tracking-tight flex flex-row-reverse items-center">
+            Emoji Snack Pack
+            <Image
+              src={urlFor(chompy)}
+              alt="a cute monster chewing something"
+              width={50}
+              height={50}
+              className="p-1 mr-1.5 sm:block"
+            />
           </span>
           <input
             value={searchTerm}
             onChange={handleSearchChange}
             placeholder="Search emojis..."
-            className="border-b-pink-300 px-2 border-b-2 fs-unmask"
+            className="border-b-pink-300 mx-2 px-2 border-b-2 fs-unmask"
           />
-          <span className="text-pink-600 md:text-xl font-bold tracking-tight">
+          <span className="text-pink-600 md:text-xl font-bold tracking-tight leading-10 ">
             Click an emoji to download it!
           </span>
         </header>
