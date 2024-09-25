@@ -85,8 +85,6 @@ export type Emoji = {
     };
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
-    alt?: string;
-    filename?: string;
     downloads?: number;
     _type: "image";
   };
@@ -478,8 +476,6 @@ export type INITIAL_EMOJIS_QUERYResult = Array<{
     };
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
-    alt?: string;
-    filename?: string;
     downloads?: number;
     _type: "image";
   } | null;
@@ -500,8 +496,6 @@ export type LOAD_MORE_EMOJIS_QUERYResult = Array<{
     };
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
-    alt?: string;
-    filename?: string;
     downloads?: number;
     _type: "image";
   } | null;
@@ -522,8 +516,6 @@ export type SEARCH_FOR_EMOJIS_QUERYResult = Array<{
     };
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
-    alt?: string;
-    filename?: string;
     downloads?: number;
     _type: "image";
   } | null;

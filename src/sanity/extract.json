@@ -426,20 +426,6 @@
               },
               "optional": true
             },
-            "alt": {
-              "type": "objectAttribute",
-              "value": {
-                "type": "string"
-              },
-              "optional": true
-            },
-            "filename": {
-              "type": "objectAttribute",
-              "value": {
-                "type": "string"
-              },
-              "optional": true
-            },
             "downloads": {
               "type": "objectAttribute",
               "value": {
