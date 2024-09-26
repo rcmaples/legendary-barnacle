@@ -1913,5 +1913,33 @@
         }
       }
     }
+  },
+  {
+    "name": "computedNumber",
+    "type": "type",
+    "value": {
+      "type": "number"
+    }
+  },
+  {
+    "name": "computedText",
+    "type": "type",
+    "value": {
+      "type": "string"
+    }
+  },
+  {
+    "name": "computedString",
+    "type": "type",
+    "value": {
+      "type": "string"
+    }
+  },
+  {
+    "name": "computedBoolean",
+    "type": "type",
+    "value": {
+      "type": "boolean"
+    }
   }
 ]

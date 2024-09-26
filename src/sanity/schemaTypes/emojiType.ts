@@ -3,6 +3,7 @@ import { SparklesIcon } from '@sanity/icons';
 import { defineType } from 'sanity';
 
 import { client } from '@/sanity/lib/client';
+import { CustomStringInput } from '../CustomStringInput';
 
 export const emojiType = defineType({
   name: 'emoji',
@@ -14,8 +15,10 @@ export const emojiType = defineType({
     {
       name: 'title',
       type: 'string',
-      title: 'Title',
-      hidden: ({ document }) => !document?.slug,
+      components: {
+        input: CustomStringInput,
+      },
+      // hidden: ({ document }) => !document?.slug,
     },
     {
       name: 'slug',
@@ -31,16 +34,6 @@ export const emojiType = defineType({
               let asset = data[0];
               return asset.originalFilename.split('.')[0];
             });
-
-          // const titleQuery = '*[_id == document._id]{...}';
-          console.log(document._id);
-          console.log(
-            client.patch(document._id).set({ title: filename }).commit()
-          );
-          // .then((res) => {
-          //   console.log(res.json());
-          // });
-
           return filename;
         },
       },
@@ -65,4 +58,13 @@ export const emojiType = defineType({
       ],
     },
   ],
+  // preview: {
+  // select: {
+  //   // title: 'title',
+  // },
+  // prepare(selection) {
+  //   const { author } = selection;
+  //   return { ...selection, subtitle: author && `by ${author}` };
+  // },
+  // },
 });
