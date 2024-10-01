@@ -59,12 +59,11 @@ export const emojiType = defineType({
     },
   ],
   // preview: {
-  // select: {
-  //   // title: 'title',
-  // },
-  // prepare(selection) {
-  //   const { author } = selection;
-  //   return { ...selection, subtitle: author && `by ${author}` };
-  // },
+  //   select: {
+  //     title: 'title',
+  //   },
+  //   prepare({ title }) {
+  //     return { title: title };
+  //   },
   // },
 });

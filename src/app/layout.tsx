@@ -7,14 +7,9 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const localEnv = process.env;
-  console.dir(localEnv);
   return (
     <html lang="en">
       <body>{children}</body>
     </html>
   );
 }
-
-
-
