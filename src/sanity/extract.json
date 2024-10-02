@@ -426,13 +426,6 @@
               },
               "optional": true
             },
-            "downloads": {
-              "type": "objectAttribute",
-              "value": {
-                "type": "number"
-              },
-              "optional": true
-            },
             "_type": {
               "type": "objectAttribute",
               "value": {
@@ -441,6 +434,13 @@
               }
             }
           }
+        },
+        "optional": true
+      },
+      "downloads": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "number"
         },
         "optional": true
       }
