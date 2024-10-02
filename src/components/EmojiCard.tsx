@@ -16,11 +16,13 @@ export function EmojiCard(props: INITIAL_EMOJIS_QUERYResult[0]) {
   if (!props['emoji']) {
     ({ title, slug, imageFile } = props);
   } else {
-    ({ title, slug, imageFile } = props['emoji']);
+    ({ title, slug, imageFile } = props['emoji']); // this feels hacky and I don't like it.
   }
 
-  const isGif = imageFile.filename.indexOf('.gif');
-  const downloadURL = urlFor(imageFile).forceDownload(imageFile.filename).url();
+  const filename = imageFile.asset.originalFilename;
+  const isGif = filename.indexOf('.gif');
+
+  const downloadURL = urlFor(imageFile).forceDownload(filename).url();
 
   const handleDownloadClick = (e) => {
     const emojiEl = e.target.textContent;

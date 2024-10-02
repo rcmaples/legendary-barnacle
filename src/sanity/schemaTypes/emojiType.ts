@@ -18,7 +18,7 @@ export const emojiType = defineType({
       components: {
         input: CustomStringInput,
       },
-      // hidden: ({ document }) => !document?.slug,
+      hidden: ({ document }) => !document?.slug,
     },
     {
       name: 'slug',
@@ -61,9 +61,13 @@ export const emojiType = defineType({
   // preview: {
   //   select: {
   //     title: 'title',
+  //     imageFile: 'imageFile',
   //   },
-  //   prepare({ title }) {
-  //     return { title: title };
+  //   prepare({ title, imageFile }) {
+  //     return {
+  //       title: title,
+  //       media: imageFile,
+  //     };
   //   },
   // },
 });

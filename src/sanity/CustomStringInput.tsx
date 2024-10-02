@@ -1,11 +1,13 @@
 // @ts-nocheck
 
-import { useCallback } from 'react';
+import { useCallback, useState, useEffect } from 'react';
 import { Box, Stack, Text, TextInput } from '@sanity/ui';
 import { useFormValue, StringInputProps, set, unset } from 'sanity';
 
 export function CustomStringInput(props: StringInputProps) {
-  const slug = useFormValue(['slug']);
+  const [emojiTitle, setEmojiTitle] = useState('');
+
+  const formSlug = useFormValue(['slug']);
 
   const {
     onChange,
@@ -17,47 +19,17 @@ export function CustomStringInput(props: StringInputProps) {
     readOnly,
   } = props;
 
+  useEffect(() => {
+    setEmojiTitle(formSlug?.current || '');
+    onChange(formSlug ? set(formSlug.current) : unset());
+  }, [formSlug, emojiTitle, onChange]);
+
   // ⬇ We aren't doing anything with these except forwarding them to our input.
-  const fwdProps = { id, ref: focusRef, onBlur, onChange, onFocus, readOnly };
-  set(slug?.current);
+  const fwdProps = { id, ref: focusRef, onBlur, onFocus, readOnly };
 
   return (
-    <Stack space={3}>
-      <TextInput {...fwdProps} value={slug?.current} />
+    <Stack space={2}>
+      <TextInput {...fwdProps} value={emojiTitle} readOnly />
     </Stack>
   );
 }
-
-// // @ts-nocheck
-// import { useCallback } from 'react';
-// import { Stack, TextInput } from '@sanity/ui';
-
-// import { set, unset } from 'sanity';
-
-// import { useFormValue } from 'sanity';
-
-// export const CustomStringInput = (props) => {
-//   const slug = useFormValue(['slug']);
-
-//   const handleChange = (event) => {
-//     const nextValue = event.currentTarget.value;
-//     onChange(nextValue ? set(nextValue) : unset());
-//   };
-
-//   const { elementProps, onChange, value = `${slug?.current}` } = props;
-//   // don't try this at home, kids
-//   // elementProps.value = slug?.current;
-//   // elementProps.readOnly = true;
-
-//   return (
-//     <Stack space={3}>
-//       {/* {props.renderDefault(props)} */}
-//       <TextInput
-//         {...elementProps}
-//         // readOnly={true}
-//         onChange={handleChange}
-//         value={value}
-//       />
-//     </Stack>
-//   );
-// };
