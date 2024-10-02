@@ -8,6 +8,7 @@ import { visionTool } from '@sanity/vision';
 import { defineConfig } from 'sanity';
 import { structureTool } from 'sanity/structure';
 import { presentationTool } from 'sanity/presentation';
+import { sanityComputedField } from 'sanity-plugin-computed-field';
 
 // Go to https://www.sanity.io/docs/api-versioning to learn how API versioning works
 import { apiVersion, dataset, projectId } from './src/sanity/env';
@@ -26,13 +27,14 @@ export default defineConfig({
     // Vision is for querying with GROQ from inside the Studio
     // https://www.sanity.io/docs/the-vision-plugin
     visionTool({ defaultApiVersion: apiVersion }),
-    presentationTool({
-      resolve,
-      previewUrl: {
-        draftMode: {
-          enable: '/api/draft-mode/enable',
-        },
-      },
-    }),
+    // presentationTool({
+    //   resolve,
+    //   previewUrl: {
+    //     draftMode: {
+    //       enable: '/api/draft-mode/enable',
+    //     },
+    //   },
+    // }),
+    sanityComputedField(),
   ],
 });

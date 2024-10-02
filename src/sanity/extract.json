@@ -426,20 +426,6 @@
               },
               "optional": true
             },
-            "alt": {
-              "type": "objectAttribute",
-              "value": {
-                "type": "string"
-              },
-              "optional": true
-            },
-            "filename": {
-              "type": "objectAttribute",
-              "value": {
-                "type": "string"
-              },
-              "optional": true
-            },
             "downloads": {
               "type": "objectAttribute",
               "value": {
@@ -1926,6 +1912,34 @@
           "optional": true
         }
       }
+    }
+  },
+  {
+    "name": "computedNumber",
+    "type": "type",
+    "value": {
+      "type": "number"
+    }
+  },
+  {
+    "name": "computedText",
+    "type": "type",
+    "value": {
+      "type": "string"
+    }
+  },
+  {
+    "name": "computedString",
+    "type": "type",
+    "value": {
+      "type": "string"
+    }
+  },
+  {
+    "name": "computedBoolean",
+    "type": "type",
+    "value": {
+      "type": "boolean"
     }
   }
 ]

@@ -85,8 +85,6 @@ export type Emoji = {
     };
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
-    alt?: string;
-    filename?: string;
     downloads?: number;
     _type: "image";
   };
@@ -318,7 +316,15 @@ export type SanityImageMetadata = {
   isOpaque?: boolean;
 };
 
-export type AllSanitySchemaTypes = SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityFileAsset | Geopoint | Emoji | Gallery | Post | Author | Category | Slug | BlockContent | SanityImageCrop | SanityImageHotspot | SanityImageAsset | SanityAssetSourceData | SanityImageMetadata;
+export type ComputedNumber = number;
+
+export type ComputedText = string;
+
+export type ComputedString = string;
+
+export type ComputedBoolean = boolean;
+
+export type AllSanitySchemaTypes = SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityFileAsset | Geopoint | Emoji | Gallery | Post | Author | Category | Slug | BlockContent | SanityImageCrop | SanityImageHotspot | SanityImageAsset | SanityAssetSourceData | SanityImageMetadata | ComputedNumber | ComputedText | ComputedString | ComputedBoolean;
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: ./src/sanity/lib/queries.ts
 // Variable: POSTS_QUERY
@@ -478,8 +484,6 @@ export type INITIAL_EMOJIS_QUERYResult = Array<{
     };
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
-    alt?: string;
-    filename?: string;
     downloads?: number;
     _type: "image";
   } | null;
@@ -500,32 +504,40 @@ export type LOAD_MORE_EMOJIS_QUERYResult = Array<{
     };
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
-    alt?: string;
-    filename?: string;
     downloads?: number;
     _type: "image";
   } | null;
   publishedAt: null;
 }>;
 // Variable: SEARCH_FOR_EMOJIS_QUERY
-// Query: *[_type == "emoji" && title match "*" + $search + "*"] | order(slug.current asc){    _id,    title,    slug,    imageFile,    publishedAt}
+// Query: *[_type == "emoji" && title match "*" + $search + "*"] | order(slug.current asc){    _id,    title,    slug,    imageFile{ asset-> },    publishedAt}
 export type SEARCH_FOR_EMOJIS_QUERYResult = Array<{
   _id: string;
   title: string | null;
   slug: Slug | null;
   imageFile: {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    alt?: string;
-    filename?: string;
-    downloads?: number;
-    _type: "image";
+    asset: {
+      _id: string;
+      _type: "sanity.imageAsset";
+      _createdAt: string;
+      _updatedAt: string;
+      _rev: string;
+      originalFilename?: string;
+      label?: string;
+      title?: string;
+      description?: string;
+      altText?: string;
+      sha1hash?: string;
+      extension?: string;
+      mimeType?: string;
+      size?: number;
+      assetId?: string;
+      uploadId?: string;
+      path?: string;
+      url?: string;
+      metadata?: SanityImageMetadata;
+      source?: SanityAssetSourceData;
+    } | null;
   } | null;
   publishedAt: null;
 }>;
@@ -539,6 +551,6 @@ declare module "@sanity/client" {
     "*[_type == \"post\" && slug.current == $slug][0]{\n  _id,\n  title,\n  body,\n  mainImage,\n  publishedAt,\n  \"categories\": coalesce(\n    categories[]->{\n      _id,\n      slug,\n      title\n    },\n    []\n  ),\n  author->{\n    name,\n    image\n  }\n}": POST_QUERYResult;
     "*[_type == \"emoji\" && defined(slug.current)]|order(slug.current asc)[0...100]{\n  _id,\n  title,\n  slug,\n  imageFile,\n  publishedAt\n}": INITIAL_EMOJIS_QUERYResult;
     "*[_type == \"emoji\" && defined(slug.current) && slug.current > $lastSlug] | order(slug.current asc)[0...100]{\n    _id,\n    title,\n    slug,\n    imageFile,\n    publishedAt\n}": LOAD_MORE_EMOJIS_QUERYResult;
-    "*[_type == \"emoji\" && title match \"*\" + $search + \"*\"] | order(slug.current asc){\n    _id,\n    title,\n    slug,\n    imageFile,\n    publishedAt\n}": SEARCH_FOR_EMOJIS_QUERYResult;
+    "*[_type == \"emoji\" && title match \"*\" + $search + \"*\"] | order(slug.current asc){\n    _id,\n    title,\n    slug,\n    imageFile{ asset-> },\n    publishedAt\n}": SEARCH_FOR_EMOJIS_QUERYResult;
   }
 }

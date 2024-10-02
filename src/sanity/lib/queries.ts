@@ -53,7 +53,7 @@ export const INITIAL_EMOJIS_QUERY =
   _id,
   title,
   slug,
-  imageFile,
+  imageFile{ asset-> },
   publishedAt
 }`);
 
@@ -62,7 +62,7 @@ export const LOAD_MORE_EMOJIS_QUERY =
     _id,
     title,
     slug,
-    imageFile,
+    imageFile{ asset-> },
     publishedAt
 }`);
 
@@ -71,7 +71,7 @@ export const SEARCH_FOR_EMOJIS_QUERY =
     _id,
     title,
     slug,
-    imageFile,
+    imageFile{ asset-> },
     publishedAt
 }`);
 
