@@ -85,9 +85,9 @@ export type Emoji = {
     };
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
-    downloads?: number;
     _type: "image";
   };
+  downloads?: number;
 };
 
 export type Gallery = {
@@ -470,42 +470,66 @@ export type POST_QUERYResult = {
   } | null;
 } | null;
 // Variable: INITIAL_EMOJIS_QUERY
-// Query: *[_type == "emoji" && defined(slug.current)]|order(slug.current asc)[0...100]{  _id,  title,  slug,  imageFile,  publishedAt}
+// Query: *[_type == "emoji" && defined(slug.current)]|order(slug.current asc)[0...100]{  _id,  title,  slug,  imageFile{ asset-> },  publishedAt}
 export type INITIAL_EMOJIS_QUERYResult = Array<{
   _id: string;
   title: string | null;
   slug: Slug | null;
   imageFile: {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    downloads?: number;
-    _type: "image";
+    asset: {
+      _id: string;
+      _type: "sanity.imageAsset";
+      _createdAt: string;
+      _updatedAt: string;
+      _rev: string;
+      originalFilename?: string;
+      label?: string;
+      title?: string;
+      description?: string;
+      altText?: string;
+      sha1hash?: string;
+      extension?: string;
+      mimeType?: string;
+      size?: number;
+      assetId?: string;
+      uploadId?: string;
+      path?: string;
+      url?: string;
+      metadata?: SanityImageMetadata;
+      source?: SanityAssetSourceData;
+    } | null;
   } | null;
   publishedAt: null;
 }>;
 // Variable: LOAD_MORE_EMOJIS_QUERY
-// Query: *[_type == "emoji" && defined(slug.current) && slug.current > $lastSlug] | order(slug.current asc)[0...100]{    _id,    title,    slug,    imageFile,    publishedAt}
+// Query: *[_type == "emoji" && defined(slug.current) && slug.current > $lastSlug] | order(slug.current asc)[0...100]{    _id,    title,    slug,    imageFile{ asset-> },    publishedAt}
 export type LOAD_MORE_EMOJIS_QUERYResult = Array<{
   _id: string;
   title: string | null;
   slug: Slug | null;
   imageFile: {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    downloads?: number;
-    _type: "image";
+    asset: {
+      _id: string;
+      _type: "sanity.imageAsset";
+      _createdAt: string;
+      _updatedAt: string;
+      _rev: string;
+      originalFilename?: string;
+      label?: string;
+      title?: string;
+      description?: string;
+      altText?: string;
+      sha1hash?: string;
+      extension?: string;
+      mimeType?: string;
+      size?: number;
+      assetId?: string;
+      uploadId?: string;
+      path?: string;
+      url?: string;
+      metadata?: SanityImageMetadata;
+      source?: SanityAssetSourceData;
+    } | null;
   } | null;
   publishedAt: null;
 }>;
@@ -549,8 +573,8 @@ declare module "@sanity/client" {
     "*[_type == \"post\" && defined(slug.current)]|order(publishedAt desc)[0...12]{\n  _id,\n  title,\n  slug,\n  body,\n  mainImage,\n  publishedAt,\n  \"categories\": coalesce(\n    categories[]->{\n      _id,\n      slug,\n      title\n    },\n    []\n  ),\n  author->{\n    name,\n    image\n  }\n}": POSTS_QUERYResult;
     "*[_type == \"post\" && defined(slug.current)]{ \n  \"slug\": slug.current\n}": POSTS_SLUGS_QUERYResult;
     "*[_type == \"post\" && slug.current == $slug][0]{\n  _id,\n  title,\n  body,\n  mainImage,\n  publishedAt,\n  \"categories\": coalesce(\n    categories[]->{\n      _id,\n      slug,\n      title\n    },\n    []\n  ),\n  author->{\n    name,\n    image\n  }\n}": POST_QUERYResult;
-    "*[_type == \"emoji\" && defined(slug.current)]|order(slug.current asc)[0...100]{\n  _id,\n  title,\n  slug,\n  imageFile,\n  publishedAt\n}": INITIAL_EMOJIS_QUERYResult;
-    "*[_type == \"emoji\" && defined(slug.current) && slug.current > $lastSlug] | order(slug.current asc)[0...100]{\n    _id,\n    title,\n    slug,\n    imageFile,\n    publishedAt\n}": LOAD_MORE_EMOJIS_QUERYResult;
+    "*[_type == \"emoji\" && defined(slug.current)]|order(slug.current asc)[0...100]{\n  _id,\n  title,\n  slug,\n  imageFile{ asset-> },\n  publishedAt\n}": INITIAL_EMOJIS_QUERYResult;
+    "*[_type == \"emoji\" && defined(slug.current) && slug.current > $lastSlug] | order(slug.current asc)[0...100]{\n    _id,\n    title,\n    slug,\n    imageFile{ asset-> },\n    publishedAt\n}": LOAD_MORE_EMOJIS_QUERYResult;
     "*[_type == \"emoji\" && title match \"*\" + $search + \"*\"] | order(slug.current asc){\n    _id,\n    title,\n    slug,\n    imageFile{ asset-> },\n    publishedAt\n}": SEARCH_FOR_EMOJIS_QUERYResult;
   }
 }

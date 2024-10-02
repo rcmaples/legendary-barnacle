@@ -47,15 +47,13 @@ export const emojiType = defineType({
         accept: 'image/*',
         storeOriginalFilename: true,
       },
-      fields: [
-        {
-          name: 'downloads',
-          type: 'number',
-          title: '# of Downloads',
-          readOnly: true,
-          initialValue: 0,
-        },
-      ],
+    },
+    {
+      name: 'downloads',
+      type: 'number',
+      title: '# of Downloads',
+      readOnly: true,
+      initialValue: 0,
     },
   ],
   // preview: {

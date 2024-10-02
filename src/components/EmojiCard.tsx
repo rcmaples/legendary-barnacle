@@ -10,14 +10,18 @@ import { urlFor } from '@/sanity/lib/image';
 // import * as FullStory from '@fullstory/browser';
 import { FullStory as FS } from '@fullstory/browser';
 import { useEffect } from 'react';
+import { client } from '@/sanity/lib/client';
 
 export function EmojiCard(props: INITIAL_EMOJIS_QUERYResult[0]) {
-  let title, slug, imageFile;
+  let title, slug, imageFile, _id;
+  // console.log(props);
   if (!props['emoji']) {
-    ({ title, slug, imageFile } = props);
+    ({ _id, title, slug, imageFile } = props);
   } else {
-    ({ title, slug, imageFile } = props['emoji']); // this feels hacky and I don't like it.
+    ({ _id, title, slug, imageFile } = props['emoji']); // this feels hacky and I don't like it.
   }
+
+  const emojiDocId = _id;
 
   const filename = imageFile.asset.originalFilename;
   const isGif = filename.indexOf('.gif');
@@ -25,8 +29,22 @@ export function EmojiCard(props: INITIAL_EMOJIS_QUERYResult[0]) {
   const downloadURL = urlFor(imageFile).forceDownload(filename).url();
 
   const handleDownloadClick = (e) => {
+    // e.preventDefault();
+
     const emojiEl = e.target.textContent;
     const emoji = emojiEl.replace(/:/g, '');
+
+    client
+      .patch(emojiDocId)
+      .setIfMissing({ downloads: 0 })
+      .inc({ downloads: 1 })
+      .commit()
+      .then((updatededEmoji) => {
+        console.log(updatededEmoji);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
 
     FS('trackEvent', {
       name: 'emoji downloaded',

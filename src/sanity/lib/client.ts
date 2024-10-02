@@ -8,6 +8,7 @@ export const client = createClient({
   apiVersion, // https://www.sanity.io/docs/api-versioning
   useCdn: true, // Set to false if statically generating pages, using ISR or tag-based revalidation
   ignoreBrowserTokenWarning: true,
+  token: process.env.NEXT_PUBLIC_SANITY_API_WRITE_TOKEN,
 });
 
 export async function sanityFetch<QueryResponse>({
