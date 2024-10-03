@@ -1,6 +1,6 @@
 // @ts-nocheck
 import { SparklesIcon } from '@sanity/icons';
-import { defineType } from 'sanity';
+import { defineType, defineField } from 'sanity';
 
 import { client } from '@/sanity/lib/client';
 import { CustomStringInput } from '../CustomStringInput';
