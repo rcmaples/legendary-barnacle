@@ -12,15 +12,16 @@ export const emojiType = defineType({
   icon: SparklesIcon,
 
   fields: [
-    {
+    defineField({
       name: 'title',
+      title: 'Title',
       type: 'string',
       components: {
         input: CustomStringInput,
       },
       hidden: ({ document }) => !document?.slug,
-    },
-    {
+    }),
+    defineField({
       name: 'slug',
       type: 'slug',
       title: 'Slug',
@@ -38,8 +39,9 @@ export const emojiType = defineType({
         },
       },
       validation: (Rule) => Rule.required(),
-    },
-    {
+    }),
+    defineField({
+      title: 'Image file',
       name: 'imageFile',
       type: 'image',
       options: {
@@ -47,14 +49,14 @@ export const emojiType = defineType({
         accept: 'image/*',
         storeOriginalFilename: true,
       },
-    },
-    {
+    }),
+    defineField({
       name: 'downloads',
       type: 'number',
       title: '# of Downloads',
       readOnly: true,
       initialValue: 0,
-    },
+    }),
   ],
   // preview: {
   //   select: {

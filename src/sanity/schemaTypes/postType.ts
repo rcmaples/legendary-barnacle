@@ -1,5 +1,5 @@
 import { DocumentTextIcon } from '@sanity/icons';
-import { defineType } from 'sanity';
+import { defineType, defineField } from 'sanity';
 
 export const postType = defineType({
   name: 'post',
@@ -7,30 +7,34 @@ export const postType = defineType({
   type: 'document',
   icon: DocumentTextIcon,
   fields: [
-    {
+    defineField({
       name: 'title',
       type: 'string',
-    },
-    {
+      title: 'Title',
+    }),
+    defineField({
       name: 'slug',
       type: 'slug',
       options: {
         source: 'title',
       },
-    },
-    {
+      title: 'Slug',
+    }),
+    defineField({
       name: 'author',
       type: 'reference',
       to: { type: 'author' },
-    },
-    {
+      title: 'Author',
+    }),
+    defineField({
       name: 'mainImage',
       type: 'image',
+      title: 'Image',
       options: {
         hotspot: true,
       },
       fields: [
-        {
+        defineField({
           name: 'alt',
           type: 'string',
           title: 'Alternative text',
@@ -42,22 +46,25 @@ export const postType = defineType({
                 ? 'Alt text is required when an image is present'
                 : true;
             }),
-        },
+        }),
       ],
-    },
-    {
+    }),
+    defineField({
       name: 'categories',
+      title: 'Categories',
       type: 'array',
       of: [{ type: 'reference', to: { type: 'category' } }],
-    },
-    {
+    }),
+    defineField({
       name: 'publishedAt',
       type: 'datetime',
-    },
-    {
+      title: 'Date published',
+    }),
+    defineField({
       name: 'body',
       type: 'blockContent',
-    },
+      title: 'Body',
+    }),
   ],
   preview: {
     select: {

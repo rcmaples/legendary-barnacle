@@ -1,5 +1,5 @@
 import { PresentationIcon } from '@sanity/icons';
-import { defineType } from 'sanity';
+import { defineType, defineField } from 'sanity';
 
 export const galleryType = defineType({
   name: 'gallery',
@@ -7,11 +7,12 @@ export const galleryType = defineType({
   type: 'document',
   icon: PresentationIcon,
   fields: [
-    {
+    defineField({
       name: 'title',
       type: 'string',
-    },
-    {
+      title: 'Title',
+    }),
+    defineField({
       title: 'Emojis',
       name: 'emojis',
       type: 'array',
@@ -19,6 +20,6 @@ export const galleryType = defineType({
         layout: 'grid',
       },
       of: [{ type: 'reference', to: { type: 'emoji' } }],
-    },
+    }),
   ],
 });
