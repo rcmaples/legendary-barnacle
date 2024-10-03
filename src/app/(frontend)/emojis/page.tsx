@@ -135,6 +135,9 @@ export default function Page() {
             onChange={handleSearchChange}
             placeholder="Search emojis..."
             className="border-b-pink-300 mx-2 px-2 border-b-2 fs-unmask"
+            id="search-bar"
+            type="text"
+            name="search-bar"
           />
           <span className="text-pink-600 md:text-xl font-bold tracking-tight leading-10 ">
             Click an emoji to download it!
