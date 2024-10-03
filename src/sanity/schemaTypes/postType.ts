@@ -7,19 +7,19 @@ export const postType = defineType({
   type: 'document',
   icon: DocumentTextIcon,
   fields: [
-    defineField({
+    {
       name: 'title',
       type: 'string',
       title: 'Title',
-    }),
-    defineField({
+    },
+    {
       name: 'slug',
       type: 'slug',
       options: {
         source: 'title',
       },
       title: 'Slug',
-    }),
+    },
     {
       name: 'author',
       type: 'reference',
@@ -34,7 +34,7 @@ export const postType = defineType({
         hotspot: true,
       },
       fields: [
-        defineField({
+        {
           name: 'alt',
           type: 'string',
           title: 'Alternative text',
@@ -46,20 +46,20 @@ export const postType = defineType({
                 ? 'Alt text is required when an image is present'
                 : true;
             }),
-        }),
+        },
       ],
-    }),
-      {
+    },
+    {
       name: 'categories',
       // title: 'Categories',
       type: 'array',
       of: [{ type: 'reference', to: { type: 'category' } }],
     },
-    defineField({
+    {
       name: 'publishedAt',
       type: 'datetime',
       title: 'Date published',
-    }),
+    },
     defineField({
       name: 'body',
       type: 'blockContent',

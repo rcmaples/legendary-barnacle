@@ -32,7 +32,6 @@ export const authorType = defineType({
       name: 'bio',
       title: 'Bio',
       type: 'array',
-      title: 'Bio',
       of: [
         {
           type: 'block',
@@ -40,7 +39,7 @@ export const authorType = defineType({
           lists: [],
         },
       ],
-    }),
+    },
   ],
   preview: {
     select: {
