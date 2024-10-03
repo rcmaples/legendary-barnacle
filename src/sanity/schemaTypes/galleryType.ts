@@ -12,14 +12,14 @@ export const galleryType = defineType({
       type: 'string',
       title: 'Title',
     }),
-    defineField({
-      title: 'Emojis',
+    {
+      // title: 'Emojis',
       name: 'emojis',
       type: 'array',
       options: {
         layout: 'grid',
       },
       of: [{ type: 'reference', to: { type: 'emoji' } }],
-    }),
+    },
   ],
 });
