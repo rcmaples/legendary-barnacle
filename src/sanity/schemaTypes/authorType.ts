@@ -1,5 +1,5 @@
 import { UserIcon } from '@sanity/icons';
-import { defineType } from 'sanity';
+import { defineField, defineType } from 'sanity';
 
 export const authorType = defineType({
   name: 'author',
@@ -7,27 +7,31 @@ export const authorType = defineType({
   type: 'document',
   icon: UserIcon,
   fields: [
-    {
+    defineField({
       name: 'name',
       type: 'string',
-    },
-    {
+      title: "Author's name",
+    }),
+    defineField({
       name: 'slug',
       type: 'slug',
+      title: 'Slug',
       options: {
         source: 'name',
       },
-    },
-    {
+    }),
+    defineField({
       name: 'image',
+      title: 'Image',
       type: 'image',
       options: {
         hotspot: true,
       },
-    },
-    {
+    }),
+    defineField({
       name: 'bio',
       type: 'array',
+      title: 'Bio',
       of: [
         {
           type: 'block',
@@ -35,7 +39,7 @@ export const authorType = defineType({
           lists: [],
         },
       ],
-    },
+    }),
   ],
   preview: {
     select: {
