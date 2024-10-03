@@ -34,7 +34,7 @@ export const postType = defineType({
         hotspot: true,
       },
       fields: [
-        {
+        defineField({
           name: 'alt',
           type: 'string',
           title: 'Alternative text',
@@ -46,10 +46,10 @@ export const postType = defineType({
                 ? 'Alt text is required when an image is present'
                 : true;
             }),
-        },
+        }),
       ],
-    },
-    {
+    }),
+      {
       name: 'categories',
       // title: 'Categories',
       type: 'array',

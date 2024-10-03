@@ -20,6 +20,6 @@ export const galleryType = defineType({
         layout: 'grid',
       },
       of: [{ type: 'reference', to: { type: 'emoji' } }],
-    },
+    }),
   ],
 });
