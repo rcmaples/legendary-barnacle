@@ -7,19 +7,19 @@ export const galleryType = defineType({
   type: 'document',
   icon: PresentationIcon,
   fields: [
+    // defineField({
+    //   name: 'title',
+    //   type: 'string',
+    //   title: 'Title',
+    // }),
     defineField({
-      name: 'title',
-      type: 'string',
-      title: 'Title',
-    }),
-    {
-      // title: 'Emojis',
+      title: 'Emojis',
       name: 'emojis',
       type: 'array',
       options: {
         layout: 'grid',
       },
       of: [{ type: 'reference', to: { type: 'emoji' } }],
-    },
+    }),
   ],
 });

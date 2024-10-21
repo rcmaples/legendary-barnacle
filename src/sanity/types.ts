@@ -96,7 +96,6 @@ export type Gallery = {
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
-  title?: string;
   emojis?: Array<{
     _ref: string;
     _type: "reference";

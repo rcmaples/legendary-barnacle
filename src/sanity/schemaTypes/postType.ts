@@ -7,26 +7,26 @@ export const postType = defineType({
   type: 'document',
   icon: DocumentTextIcon,
   fields: [
-    {
+    defineField({
       name: 'title',
       type: 'string',
       title: 'Title',
-    },
-    {
+    }),
+    defineField({
       name: 'slug',
       type: 'slug',
       options: {
         source: 'title',
       },
       title: 'Slug',
-    },
-    {
+    }),
+    defineField({
+      title: 'Author',
       name: 'author',
       type: 'reference',
       to: { type: 'author' },
-      // title: 'Author',
-    },
-    {
+    }),
+    defineField({
       name: 'mainImage',
       type: 'image',
       title: 'Image',
@@ -34,32 +34,34 @@ export const postType = defineType({
         hotspot: true,
       },
       fields: [
-        {
+        defineField({
           name: 'alt',
           type: 'string',
           title: 'Alternative text',
           validation: (rule) =>
-            rule.custom((value, context) => {
-              const parent = context?.parent as { asset?: { _ref?: string } };
+            rule
+              .custom((value, context) => {
+                const parent = context?.parent as { asset?: { _ref?: string } };
 
-              return !value && parent?.asset?._ref
-                ? 'Alt text is required when an image is present'
-                : true;
-            }),
-        },
+                return !value && parent?.asset?._ref
+                  ? 'Alt text is required when an image is present'
+                  : true;
+              })
+              .error('Alt text is required when an image is present'),
+        }),
       ],
-    },
-    {
+    }),
+    defineField({
       name: 'categories',
       // title: 'Categories',
       type: 'array',
       of: [{ type: 'reference', to: { type: 'category' } }],
-    },
-    {
+    }),
+    defineField({
       name: 'publishedAt',
       type: 'datetime',
       title: 'Date published',
-    },
+    }),
     defineField({
       name: 'body',
       type: 'blockContent',

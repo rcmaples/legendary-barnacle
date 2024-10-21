@@ -481,13 +481,6 @@
           "type": "string"
         }
       },
-      "title": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "string"
-        },
-        "optional": true
-      },
       "emojis": {
         "type": "objectAttribute",
         "value": {

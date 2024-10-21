@@ -38,7 +38,7 @@ export const emojiType = defineType({
           return filename;
         },
       },
-      validation: (Rule) => Rule.required(),
+      validation: (Rule) => Rule.required().error('A slug is required'),
     }),
     defineField({
       title: 'Image file',
